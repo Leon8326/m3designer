@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Material 3 Designer</title>
+  <script type="module">
+    // Import Material Web Components from CDN
+    import 'https://cdn.jsdelivr.net/npm/@material/web/button/filled-button.js';
+    import 'https://cdn.jsdelivr.net/npm/@material/web/button/outlined-button.js';
+    import 'https://cdn.jsdelivr.net/npm/@material/web/textfield/filled-text-field.js';
+    import 'https://cdn.jsdelivr.net/npm/@material/web/textfield/standard-text-field.js';
+    import 'https://cdn.jsdelivr.net/npm/@material/web/switch/switch.js';
+    import 'https://cdn.jsdelivr.net/npm/@material/web/checkbox/checkbox.js';
+    import 'https://cdn.jsdelivr.net/npm/@material/web/radio/radio.js';
+    import 'https://cdn.jsdelivr.net/npm/@material/web/slider/slider.js';
+    import 'https://cdn.jsdelivr.net/npm/@material/web/dialog/dialog.js';
+    import 'https://cdn.jsdelivr.net/npm/@material/web/menu/menu.js';
+    import 'https://cdn.jsdelivr.net/npm/@material/web/card/card.js';
+    import 'https://cdn.jsdelivr.net/npm/@material/web/iconbutton/icon-button.js';
+    import 'https://cdn.jsdelivr.net/npm/@material/web/icon/icon.js';
+  </script>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      padding: 2rem;
+      background: #f6f6f6;
+    }
+
+    .preview {
+      margin-top: 1rem;
+      padding: 1rem;
+      background: white;
+      border: 1px solid #ccc;
+    }
+
+    textarea {
+      width: 100%;
+      height: 200px;
+      margin-top: 1rem;
+      font-family: monospace;
+    }
+
+    select, input, button {
+      padding: 0.5rem;
+      font-size: 1rem;
+      margin-top: 1rem;
+      margin-right: 1rem;
+    }
+
+    .input-wrapper {
+      display: flex;
+      align-items: center;
+      margin-bottom: 1rem;
+    }
+
+    .input-wrapper label {
+      margin-right: 1rem;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>Material 3 Designer</h1>
+
+  <div class="input-wrapper">
+    <label for="component">Choose a component:</label>
+    <select id="component">
+      <option value="button-filled">Button (Filled)</option>
+      <option value="button-outlined">Button (Outlined)</option>
+      <option value="textfield-filled">Text Field (Filled)</option>
+      <option value="textfield-standard">Text Field (Standard)</option>
+      <option value="switch">Switch</option>
+      <option value="checkbox">Checkbox</option>
+      <option value="radio">Radio Button</option>
+      <option value="slider">Slider</option>
+      <option value="dialog">Dialog</option>
+      <option value="menu">Menu</option>
+      <option value="card">Card</option>
+      <option value="icon-button">Icon Button</option>
+      <option value="icon">Icon</option>
+    </select>
+  </div>
+
+  <div class="input-wrapper">
+    <label for="labelInput">Label or text:</label>
+    <input type="text" id="labelInput" placeholder="Label or text..." />
+  </div>
+
+  <button onclick="generateCode()">Generate Code</button>
+
+  <div class="preview" id="previewArea"></div>
+
+  <h3>Generated HTML</h3>
+  <textarea id="codeOutput" readonly></textarea>
+
+  <script>
+    function generateCode() {
+      const component = document.getElementById("component").value;
+      const label = document.getElementById("labelInput").value.trim();
+      const preview = document.getElementById("previewArea");
+      const output = document.getElementById("codeOutput");
+
+      let html = '';
+
+      switch (component) {
+        case 'button-filled':
+          html = `<md-filled-button>${label || 'Click me'}</md-filled-button>`;
+          break;
+        case 'button-outlined':
+          html = `<md-outlined-button>${label || 'Click me'}</md-outlined-button>`;
+          break;
+        case 'textfield-filled':
+          html = `<md-filled-text-field label="${label || 'Enter text'}"></md-filled-text-field>`;
+          break;
+        case 'textfield-standard':
+          html = `<md-standard-text-field label="${label || 'Enter text'}"></md-standard-text-field>`;
+          break;
+        case 'switch':
+          html = `<md-switch ?selected="${label.toLowerCase() === 'on'}"></md-switch>`;
+          break;
+        case 'checkbox':
+          html = `<md-checkbox>${label || 'Check me'}</md-checkbox>`;
+          break;
+        case 'radio':
+          html = `<md-radio>${label || 'Radio Option'}</md-radio>`;
+          break;
+        case 'slider':
+          html = `<md-slider min="0" max="100" value="50"></md-slider>`;
+          break;
+        case 'dialog':
+          html = `<md-dialog open>
+                    <h2>${label || 'Dialog Title'}</h2>
+                    <p>Dialog content goes here.</p>
+                    <md-filled-button>Close</md-filled-button>
+                  </md-dialog>`;
+          break;
+        case 'menu':
+          html = `<md-menu>
+                    <md-menu-item>${label || 'Menu Item 1'}</md-menu-item>
+                    <md-menu-item>Menu Item 2</md-menu-item>
+                  </md-menu>`;
+          break;
+        case 'card':
+          html = `<md-card>
+                    <h3>${label || 'Card Title'}</h3>
+                    <p>Card content...</p>
+                  </md-card>`;
+          break;
+        case 'icon-button':
+          html = `<md-icon-button icon="home"></md-icon-button>`;
+          break;
+        case 'icon':
+          html = `<md-icon icon="home"></md-icon>`;
+          break;
+      }
+
+      preview.innerHTML = html;
+      output.value = html;
+    }
+  </script>
+
+</body>
+</html>
