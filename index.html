@@ -1,25 +1,30 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Material 3 Designer</title>
-  <script type="module">
-    // Import Material Web Components from CDN (Material 3)
-    import 'https://cdn.jsdelivr.net/npm/@material/web/button/filled-button.js';
-    import 'https://cdn.jsdelivr.net/npm/@material/web/button/outlined-button.js';
-    import 'https://cdn.jsdelivr.net/npm/@material/web/textfield/filled-text-field.js';
-    import 'https://cdn.jsdelivr.net/npm/@material/web/textfield/standard-text-field.js';
-    import 'https://cdn.jsdelivr.net/npm/@material/web/switch/switch.js';
-    import 'https://cdn.jsdelivr.net/npm/@material/web/checkbox/checkbox.js';
-    import 'https://cdn.jsdelivr.net/npm/@material/web/radio/radio.js';
-    import 'https://cdn.jsdelivr.net/npm/@material/web/slider/slider.js';
-    import 'https://cdn.jsdelivr.net/npm/@material/web/dialog/dialog.js';
-    import 'https://cdn.jsdelivr.net/npm/@material/web/menu/menu.js';
-    import 'https://cdn.jsdelivr.net/npm/@material/web/card/card.js';
-    import 'https://cdn.jsdelivr.net/npm/@material/web/iconbutton/icon-button.js';
-    import 'https://cdn.jsdelivr.net/npm/@material/web/icon/icon.js';
+  <title>Material 3 Web - Quickstart</title>
+
+  <!-- Google Fonts for Material Typography -->
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+
+  <!-- Import Material Web Components from CDN (Material 3) via importmap -->
+  <script type="importmap">
+    {
+      "imports": {
+        "@material/web/": "https://cdn.jsdelivr.net/npm/@material/web/"
+      }
+    }
   </script>
+
+  <script type="module">
+    import '@material/web/all.js';
+    import { styles as typescaleStyles } from '@material/web/typography/md-typescale-styles.js';
+
+    document.adoptedStyleSheets.push(typescaleStyles.styleSheet);
+  </script>
+
   <style>
     body {
       font-family: 'Roboto', sans-serif;
@@ -32,11 +37,22 @@
       color: #333;
     }
 
+    form {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 16px;
+    }
+
     .preview {
       margin-top: 1rem;
       padding: 1rem;
       background: white;
       border: 1px solid #ccc;
+    }
+
+    .input-wrapper label {
+      margin-right: 1rem;
     }
 
     textarea {
@@ -46,75 +62,65 @@
       font-family: monospace;
     }
 
-    select, input, button {
+    select,
+    input,
+    button {
       padding: 0.5rem;
       font-size: 1rem;
       margin-top: 1rem;
       margin-right: 1rem;
     }
-
-    .input-wrapper {
-      display: flex;
-      align-items: center;
-      margin-bottom: 1rem;
-    }
-
-    .input-wrapper label {
-      margin-right: 1rem;
-    }
   </style>
 </head>
+
 <body>
+  <h1 class="md-typescale-display-medium">Hello Material!</h1>
 
-  <h1>Material 3 Designer</h1>
+  <form>
+    <div class="input-wrapper">
+      <label for="component">Choose a component:</label>
+      <select id="component">
+        <option value="button-filled">Button (Filled)</option>
+        <option value="button-outlined">Button (Outlined)</option>
+        <option value="textfield-filled">Text Field (Filled)</option>
+        <option value="textfield-standard">Text Field (Standard)</option>
+        <option value="switch">Switch</option>
+        <option value="checkbox">Checkbox</option>
+        <option value="radio">Radio Button</option>
+        <option value="slider">Slider</option>
+        <option value="dialog">Dialog</option>
+        <option value="menu">Menu</option>
+        <option value="card">Card</option>
+        <option value="icon-button">Icon Button</option>
+        <option value="icon">Icon</option>
+      </select>
+    </div>
 
-  <div class="input-wrapper">
-    <label for="component">Choose a component:</label>
-    <select id="component">
-      <option value="button-filled">Button (Filled)</option>
-      <option value="button-outlined">Button (Outlined)</option>
-      <option value="textfield-filled">Text Field (Filled)</option>
-      <option value="textfield-standard">Text Field (Standard)</option>
-      <option value="switch">Switch</option>
-      <option value="checkbox">Checkbox</option>
-      <option value="radio">Radio Button</option>
-      <option value="slider">Slider</option>
-      <option value="dialog">Dialog</option>
-      <option value="menu">Menu</option>
-      <option value="card">Card</option>
-      <option value="icon-button">Icon Button</option>
-      <option value="icon">Icon</option>
-    </select>
-  </div>
+    <div class="input-wrapper">
+      <label for="labelInput">Label or text:</label>
+      <input type="text" id="labelInput" placeholder="Label or text..." />
+    </div>
 
-  <div class="input-wrapper">
-    <label for="labelInput">Label or text:</label>
-    <input type="text" id="labelInput" placeholder="Label or text..." />
-  </div>
-
-  <button onclick="generateCode()">Generate Code</button>
+    <md-outlined-button type="button" onclick="generateCode()">Generate Code</md-outlined-button>
+  </form>
 
   <div class="preview" id="previewArea"></div>
 
   <h3>Before you continue...</h3>
   <p>Please insert the following code:</p>
-  <textarea readonly><script type="module">
-    // Import Material Web Components from CDN (Material 3)
-    import 'https://cdn.jsdelivr.net/npm/@material/web/button/filled-button.js';
-    import 'https://cdn.jsdelivr.net/npm/@material/web/button/outlined-button.js';
-    import 'https://cdn.jsdelivr.net/npm/@material/web/textfield/filled-text-field.js';
-    import 'https://cdn.jsdelivr.net/npm/@material/web/textfield/standard-text-field.js';
-    import 'https://cdn.jsdelivr.net/npm/@material/web/switch/switch.js';
-    import 'https://cdn.jsdelivr.net/npm/@material/web/checkbox/checkbox.js';
-    import 'https://cdn.jsdelivr.net/npm/@material/web/radio/radio.js';
-    import 'https://cdn.jsdelivr.net/npm/@material/web/slider/slider.js';
-    import 'https://cdn.jsdelivr.net/npm/@material/web/dialog/dialog.js';
-    import 'https://cdn.jsdelivr.net/npm/@material/web/menu/menu.js';
-    import 'https://cdn.jsdelivr.net/npm/@material/web/card/card.js';
-    import 'https://cdn.jsdelivr.net/npm/@material/web/iconbutton/icon-button.js';
-    import 'https://cdn.jsdelivr.net/npm/@material/web/icon/icon.js';
-</script>
-  </textarea>
+  <textarea readonly><script type="importmap">
+    {
+      "imports": {
+        "@material/web/": "https://cdn.jsdelivr.net/npm/@material/web/"
+      }
+    }
+  </script>
+  <script type="module">
+    import '@material/web/all.js';
+    import { styles as typescaleStyles } from '@material/web/typography/md-typescale-styles.js';
+
+    document.adoptedStyleSheets.push(typescaleStyles.styleSheet);
+  </script></textarea>
 
   <h3>Generated HTML</h3>
   <textarea id="codeOutput" readonly></textarea>
@@ -186,4 +192,5 @@
   </script>
 
 </body>
+
 </html>
